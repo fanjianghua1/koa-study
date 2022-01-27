@@ -1,12 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2022-01-27 15:55:52
- * @LastEditTime: 2022-01-27 16:54:51
+ * @LastEditTime: 2022-01-28 01:08:54
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \api\src\controller\user.controller.js
  */
 const { createUser } = require('../service/user.service');
+const { userRegisterError } = require('../constant/err.type');
 
 // 放置路由相关接口地址的 处理函数
 class UserController {
@@ -16,11 +17,22 @@ class UserController {
         const { user_name, password } = ctx.request.body
 
         // //2. 操作数据库
-        const res = await createUser(user_name, password)
-        console.log(res);
+        try {
+            const res = await createUser(user_name, password)
 
-        // //3. 返回结果
-        ctx.body = ctx.request.body
+            // //3. 返回结果
+            ctx.body = {
+                code: 0,
+                message: '用户注册成功',
+                result: {
+                    id: res.id,
+                    user_name: res.user_name
+                },
+            }
+        } catch (err) {
+            console.log(err);
+            ctx.app.emit('error', userRegisterError, ctx)
+        }
     }
 
     async login(ctx, next) {
