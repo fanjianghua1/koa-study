@@ -1,11 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2022-01-28 00:54:04
- * @LastEditTime: 2022-02-02 15:47:38
+ * @LastEditTime: 2022-02-02 23:54:55
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \api\src\consitant\err.type.js
  */
+// 错误类型抽离
 module.exports = {
     userFormatError: {
         code: '10001',
@@ -52,4 +53,39 @@ module.exports = {
         message: '无效的token',
         result: ''
     },
+    hasNotAdminPermission: {
+        code: '10103',
+        message: '没有管理员权限',
+        result: ''
+    },
+    fileUploadError: {
+        code: '10201',
+        message: '商品图片上传失败',
+        result: ''
+    },
+    unSupportedFileType: {
+        code: '10202',
+        message: "不支持的图片格式",
+        result: ''
+    },
+    goodsFormatError: {
+        code: '10203',
+        message: '商品格式错误',
+        result: ''
+    },
+    publishGoodsError: {
+        code: '10204',
+        message: '发布商品错误',
+        result: ''
+    },
+    invalidGoodsID: {
+        code: '10205',
+        message: '修改的商品信息不存在',
+        result: ''
+    },
+    cartFormatError: {
+        code: '10301',
+        message: "购物车数据格式错误",
+        result: ''
+    }
 }
